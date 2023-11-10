@@ -1,6 +1,7 @@
 <template>
     <Layout>
         <h1 class="text-danger fw-bold">Users</h1>
+        <!-- users table -->
         <table class="mt-4 table table-hover table-striped">
             <thead>
                 <tr>
