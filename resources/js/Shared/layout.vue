@@ -1,4 +1,5 @@
 <template>
+    <Head :title="$page.component" />
     <header class="bg-secondary bg-opacity-25">
         <div class="container d-flex justify-content-between p-3">
             <div class="d-flex gap-4">
@@ -14,10 +15,11 @@
 </template>
 
 <script>
+import { Head } from "@inertiajs/vue3";
 import Nav from "./Nav.vue";
 
 export default {
-    components: { Nav },
+    components: { Nav, Head },
     computed : {
         username(){
             // get data from inertia object in initialPage <$page>
