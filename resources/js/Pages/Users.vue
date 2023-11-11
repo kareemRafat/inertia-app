@@ -1,5 +1,17 @@
 <template>
-    <h1 class="text-danger fw-bold">Users</h1>
+    <div class="row align-items-center justify-content-between">
+        <div class="col-6">
+            <h1 class="text-danger fw-bold">Users</h1>
+        </div>
+        <div class="col-4">
+            <input
+                v-model="search"
+                placeholder="search..."
+                type="email"
+                class="form-control"
+            />
+        </div>
+    </div>
     <!-- users table -->
     <table class="mt-4 table table-hover table-striped">
         <thead>
@@ -44,12 +56,25 @@ import Paginator from "../Shared/Paginator.vue";
 
 export default {
     layout: Layout, // make the layout is the parent component
-    props: ["users"],
+    props: ["users" , "searchFilter"],
     components: { Layout, Link, Paginator },
     data() {
         return {
-            username: "kareem",
+            // take the data from search in laravel
+            search: this.searchFilter,
         };
+    },
+    watch: {
+        // watch any change is search property
+        search(newSearch, oldSearch) {
+            // to send get request with querey string parameter
+            this.$inertia.get(
+                "/users",
+                { search: newSearch },
+                { preserveState: true , replace : true}
+                //replace (for no history records) option video : min : 1:52
+            );
+        },
     },
 };
 </script>

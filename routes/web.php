@@ -21,8 +21,13 @@ Route::get('/', function () {
 
 Route::get('/users', function () {
     // sleep(3);
+    // user with search and pagination and save the old querystring parameters
+    $users = User::when(request('search') , function ($query, $search) {
+        $query->where('name', 'like', "%{$search}%");
+    })->paginate(5)->withQueryString();
     return Inertia::render('Users', [
-        'users' => User::paginate(5)
+        'users' => $users,
+        'searchFilter' => request('search')
     ]);
 });
 
@@ -34,7 +39,7 @@ Route::post('logout', function () {
     return redirect('/');
 });
 
-Route::delete('/delete' , function(){
+Route::delete('/delete', function () {
     User::find(request('id'))->delete();
     return redirect('/users');
 });
