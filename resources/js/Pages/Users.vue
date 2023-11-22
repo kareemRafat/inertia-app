@@ -1,7 +1,8 @@
 <template>
     <div class="row align-items-center justify-content-between">
-        <div class="col-6">
+        <div class="col-6 d-flex align-items-center">
             <h1 class="text-danger fw-bold">Users</h1>
+            <Link href="/create" class="btn text-primary fw-bold ms-2">Add user</Link>
         </div>
         <div class="col-4">
             <input
