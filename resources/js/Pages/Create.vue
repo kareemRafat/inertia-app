@@ -55,21 +55,22 @@
 
 <script>
 import Layout from "../Shared/layout.vue";
-import { Link } from "@inertiajs/vue3";
+import { Link, useForm } from "@inertiajs/vue3";
 export default {
     layout: Layout, // will take the template and put it in slot in the layout
     components: { Layout, Link },
     props : ['errors'], // to get the error property from the return object
     data: () => ({
-        form: {
+        // useForm helper
+        form: useForm({
             name: "",
             email: "",
             password: "",
-        },
+        }),
     }),
     methods: {
         submit() {
-            this.$inertia.post("/users", this.form);
+            this.form.post("/users", this.form);
         },
     },
 };
